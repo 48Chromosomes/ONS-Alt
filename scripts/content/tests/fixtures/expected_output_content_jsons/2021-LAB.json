@@ -24,11 +24,7 @@
               "code": "economic_activity_status_3a",
               "slug": "economic-activity-status-3a",
               "desc": "Economic activity status (3 categories)",
-              "available_geotypes": [
-                "oa",
-                "msoa",
-                "lad"
-              ],
+              "available_geotypes": ["oa", "msoa", "lad"],
               "choropleth_default": true,
               "data_download": "https://www.ons.gov.uk/datasets/TS066/editions/2021/versions/1",
               "categories": [
@@ -54,11 +50,7 @@
               "code": "economic_activity_status_4a",
               "slug": "economic-activity-status-4a",
               "desc": "Economic activity status (4 categories)",
-              "available_geotypes": [
-                "oa",
-                "msoa",
-                "lad"
-              ],
+              "available_geotypes": ["oa", "msoa", "lad"],
               "dot_density_default": true,
               "data_download": "https://www.ons.gov.uk/datasets/TS066/editions/2021/versions/1",
               "categories": [
@@ -92,11 +84,7 @@
               "code": "economic_activity_status_10a",
               "slug": "economic-activity-status-10a",
               "desc": "Economic activity status (10 categories)",
-              "available_geotypes": [
-                "oa",
-                "msoa",
-                "lad"
-              ],
+              "available_geotypes": ["oa", "msoa", "lad"],
               "data_download": "https://www.ons.gov.uk/datasets/TS066/editions/2021/versions/1",
               "categories": [
                 {
@@ -190,11 +178,7 @@
               "code": "has_ever_worked",
               "slug": "has-ever-worked",
               "desc": "Employment history (4 categories)",
-              "available_geotypes": [
-                "oa",
-                "msoa",
-                "lad"
-              ],
+              "available_geotypes": ["oa", "msoa", "lad"],
               "choropleth_default": true,
               "dot_density_default": true,
               "data_download": "https://www.nomisweb.co.uk/datasets/c2021ts065",
@@ -242,11 +226,7 @@
               "code": "hours_per_week_worked_3a",
               "slug": "hours-per-week-worked-3a",
               "desc": "Hours worked (3 categories)",
-              "available_geotypes": [
-                "oa",
-                "msoa",
-                "lad"
-              ],
+              "available_geotypes": ["oa", "msoa", "lad"],
               "choropleth_default": true,
               "dot_density_default": true,
               "data_download": "https://www.ons.gov.uk/datasets/TS059/editions/2021/versions/1",
@@ -273,11 +253,7 @@
               "code": "hours_per_week_worked",
               "slug": "hours-per-week-worked",
               "desc": "Hours worked (5 categories)",
-              "available_geotypes": [
-                "oa",
-                "msoa",
-                "lad"
-              ],
+              "available_geotypes": ["oa", "msoa", "lad"],
               "data_download": "https://www.ons.gov.uk/datasets/TS059/editions/2021/versions/1",
               "categories": [
                 {
@@ -331,10 +307,7 @@
               "code": "industry_current_88a",
               "slug": "industry-current-88a",
               "desc": "Industry (current) (88 categories)",
-              "available_geotypes": [
-                "msoa",
-                "lad"
-              ],
+              "available_geotypes": ["msoa", "lad"],
               "choropleth_default": true,
               "data_download": "https://www.ons.gov.uk/datasets/TS060/editions/2021/versions/1",
               "categories": [
@@ -1053,11 +1026,7 @@
               "code": "ns_sec_10a",
               "slug": "ns-sec-10a",
               "desc": "National Statistics Socio-economic Classification (NS-SeC) (10 categories)",
-              "available_geotypes": [
-                "oa",
-                "msoa",
-                "lad"
-              ],
+              "available_geotypes": ["oa", "msoa", "lad"],
               "choropleth_default": true,
               "data_download": "https://www.ons.gov.uk/datasets/TS062/editions/2021/versions/1",
               "categories": [
@@ -1152,10 +1121,7 @@
               "code": "occupation_current_10a",
               "slug": "occupation-current-10a",
               "desc": "Occupation (current) (10 categories)",
-              "available_geotypes": [
-                "msoa",
-                "lad"
-              ],
+              "available_geotypes": ["msoa", "lad"],
               "choropleth_default": true,
               "data_download": "https://www.ons.gov.uk/datasets/TS063/editions/2021/versions/1",
               "categories": [

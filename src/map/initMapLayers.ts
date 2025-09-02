@@ -11,8 +11,8 @@ import { dotdensityColours } from "../helpers/dotdensityHelpers";
 
 const layerBounds: NumberQuadruple = [-6.418, 49.864, 1.764, 55.812];
 
-export const makeColors = (categories) => {
-  const cols = ["match", ["get", "cat"]];
+export const makeColors = (categories: string[]) => {
+  const cols: any[] = ["match", ["get", "cat"]];
   categories.forEach((cat, i) => {
     cols.push(cat);
     cols.push(dotdensityColours[i]);
@@ -43,7 +43,7 @@ export const initDotDensityLayers = (map: mapboxgl.Map, params) => {
         "source-layer": params.classification.code,
         filter: ["in", "cat", ...params.categories.map((c) => c?.code)],
         paint: {
-          "circle-color": makeColors(params.classification.categories.map((c) => c.code)),
+          "circle-color": makeColors(params.classification.categories.map((c) => c.code)) as any,
           "circle-radius": {
             stops: [
               [8, 0.7],

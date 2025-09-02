@@ -47,6 +47,27 @@ const getDataForMode = async (mode: Mode, args) => {
     case "choropleth":
     case "change": {
       const [data, breaks] = await Promise.all([fetchSingleCategoryDataForBbox(args), fetchBreaks(args)]);
+      
+      // Check if this is a special binary category (White Binary)
+      const isBinaryCategory = args.category?.slug === "white-binary";
+      
+      if (isBinaryCategory) {
+        // For binary categories, transform the data to show majority/minority
+        // Census data is in percentage format (0-100), so threshold is 50
+        const threshold = 50;
+        const binaryData = data.map((place) => ({
+          ...place,
+          isMajority: place.categoryValue >= threshold,
+        }));
+        
+        return {
+          kind: "single-category" as const,
+          places: binaryData,
+          breaks: [0, 50, 100], // Binary breaks for percentage data
+          isBinary: true,
+        };
+      }
+      
       return {
         kind: "single-category" as const,
         places: data,

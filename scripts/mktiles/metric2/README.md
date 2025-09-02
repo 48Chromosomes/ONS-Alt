@@ -10,4 +10,4 @@ will be printed and won't be removed.
 
 For example, to run the breaks tests and keep the output files:
 
-	TEST_KEEP_TMP=1 go test ./ -run Test_MakeBreaks
+    TEST_KEEP_TMP=1 go test ./ -run Test_MakeBreaks

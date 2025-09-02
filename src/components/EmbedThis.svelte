@@ -63,7 +63,7 @@
 
 <div class="">
   <button
-    class="flex items-center gap-2 custom-ring hyperlink "
+    class="flex items-center gap-2 custom-ring hyperlink"
     on:click={() => {
       doGeoLock = $page.url.searchParams.has("geoLock") ? true : false;
       open = true;
@@ -81,7 +81,7 @@
 <dialog bind:this={dialog} on:close={() => (open = false)} class="m-auto max-w-5xl p-6">
   <form method="dialog">
     <div class="flex justify-between">
-      <h2 class="mb-4 text-xl font-semibold md:text-2xl ">Embed this map</h2>
+      <h2 class="mb-4 text-xl font-semibold md:text-2xl">Embed this map</h2>
       <div class="text-3xl">
         <button class="custom-ring" title="Close dialog" value="cancel"><Icon kind="close" /></button>
       </div>

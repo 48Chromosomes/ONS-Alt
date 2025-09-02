@@ -123,6 +123,8 @@
               <span class={legendTextClass}>
                 {#if $viz.params.mode === "change"}
                   Ten year change in
+                {:else if $viz.params.mode === "binary"}
+                  Binary view:
                 {/if}
                 {active.displayName}
               </span>
@@ -146,16 +148,30 @@
         </div>
       {/if}
       {#if $viz}
-        <BreaksChart
-          selected={$selected && "value" in $selected ? $selected?.value : undefined}
-          hovered={active.value}
-          {suffix}
-          breaks={$viz.breaks}
-          colors={getColours($viz.params.mode, $viz.breaks)}
-          mode={$viz.params.mode}
-          classificationCode={$viz.params.classification.code}
-          showPositive={shouldShowPositiveSign($viz.params.mode)}
-        />
+        {#if $viz.params.category?.slug === "white-binary"}
+          <!-- Binary legend -->
+          <div class="flex items-center justify-center gap-6 mt-3">
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 border border-gray-300" style="background-color: #e74c3c" />
+              <span class="text-sm font-medium">&lt; 50% White (Minority)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 border border-gray-300" style="background-color: #27ae60" />
+              <span class="text-sm font-medium">≥ 50% White (Majority)</span>
+            </div>
+          </div>
+        {:else}
+          <BreaksChart
+            selected={$selected && "value" in $selected ? $selected?.value : undefined}
+            hovered={active.value}
+            {suffix}
+            breaks={$viz.breaks}
+            colors={getColours($viz.params.mode, $viz.breaks)}
+            mode={$viz.params.mode}
+            classificationCode={$viz.params.classification.code}
+            showPositive={shouldShowPositiveSign($viz.params.mode)}
+          />
+        {/if}
         <MapLegendExplanation
           mode={$viz.params.mode}
           classificationCode={$viz.params.classification.code}

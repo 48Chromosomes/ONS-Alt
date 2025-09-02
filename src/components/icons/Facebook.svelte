@@ -1,5 +1,5 @@
 <svg
-  class="ons-svg-icon ons-svg-icon--xxl "
+  class="ons-svg-icon ons-svg-icon--xxl"
   id="icon-facebook"
   viewBox="0 0 32 32"
   xmlns="http://www.w3.org/2000/svg"

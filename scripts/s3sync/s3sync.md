@@ -11,22 +11,22 @@ s3sync(1) - General Commands Manual
 \[**-n**]
 \[**-C**]
 \[**-D**]
-\[**-w**&nbsp;*workers*]
-*src*
-*dst*
+\[**-w**&nbsp;_workers_]
+_src_
+_dst_
 
 # DESCRIPTION
 
 **s3sync**
 transfers files between S3 and a local directory.
 Its default mode copies missing or changed files from
-*src*
+_src_
 to
-*dst*,
+_dst_,
 and removes files on
-*dst*
+_dst_
 which don't exist on
-*src*.
+_src_.
 
 CRC32 checksums determine if a file has changed or not.
 
@@ -59,22 +59,21 @@ recognises the following flags:
 
 > Do not delete files on destination.
 
-**-w** *workers*
+**-w** _workers_
 
 > Use
-> *workers*
+> _workers_
 > concurrent goroutines in the checksum, copy and remove phases.
 > The default for workers is the value of Go's
 > '`runtime.NumCPU`'
 > function.
 > You can see what this by running
-> **s3sync**
-> **-h**.
+> **s3sync** > **-h**.
 > The default value for workers will be included in the help message.
 
-*src*
+_src_
 and
-*dst*
+_dst_
 can be S3 locations or local directories.
 Any combination is supported.
 
@@ -144,8 +143,8 @@ and run
 directly:
 
 > export AWS_REGION=eu-west-2<br>
-> export AWS_ACCESS_KEY_ID=*id*<br>
-> export AWS_SECRET_ACCESS_KEY=*secret*<br>
+> export AWS_ACCESS_KEY_ID=_id_<br>
+> export AWS_SECRET_ACCESS_KEY=_secret_<br>
 > s3sync -n ./somedir s3://mybucket<br>
 
 For more complicated authentication, you can run

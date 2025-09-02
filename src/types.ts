@@ -81,6 +81,7 @@ export type MultiCategoryVizData = VizData & {
   places: { geoCode: string; categoryValue: number }[];
 };
 
+
 export type GeographyInfo = {
   geoType: GeoType;
   geoCode: string;

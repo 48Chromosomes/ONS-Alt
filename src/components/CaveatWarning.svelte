@@ -13,7 +13,7 @@
       </div>
     </div>
   </div>
-  <div class="py-3 " style="white-space:pre-wrap">
+  <div class="py-3" style="white-space:pre-wrap">
     <span class="sr-only">Warning</span>{text}
     {#if link}
       <a href={link} class="hyperlink custom-ring whitespace-nowrap">Read more</a>

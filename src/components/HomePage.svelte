@@ -28,7 +28,7 @@
     {/if}
 
     <div class="bg-ons-grey-5 p-6 mt-8 mb-9">
-      <h3 class="pb-3 text-xl font-semibold ">Examples</h3>
+      <h3 class="pb-3 text-xl font-semibold">Examples</h3>
       <ul>
         <SogiExamples />
       </ul>

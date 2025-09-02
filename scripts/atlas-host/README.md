@@ -2,8 +2,8 @@
 
 The Atlas host is used to
 
-* process data files used by the Census Map front end application
-* transfer large or sensitive files to and from S3
+- process data files used by the Census Map front end application
+- transfer large or sensitive files to and from S3
 
 A specific host is used for this work because some of the processing is too heavyweight for our laptops, and because it allows us to do all processing within the AWS environment.
 No data needs to be downloaded to our laptops.
@@ -17,7 +17,7 @@ User homes are on EFS and a container's `/local` is on a docker volume.
 (`/local` survives container resizes, and EFS homes survive host rebuilds.
 `/local` will also survive container resizes; if you change the container to a `t2.micro`, `/local` will be preserved.
 But don't change the size of `/local` or destroy and rebuild the instance.
-That *will* blow it away.)
+That _will_ blow it away.)
 
 Although all users shell into the Atlas host as `ubuntu`, there is a notion of separate users inside containers.
 Unix accounts are set up within the container.
@@ -27,7 +27,6 @@ There are no passwords on user accounts; only ssh keys are allowed.
 The user mechanism is designed as a convenience to keep user work separate;
 it's not really secure since `ubuntu` is effectively superuser.
 
-
 ## Building an Atlas host
 
 The Atlas host is built with terraform and ansible in the [dp-setup](https://github.com/ONSdigital/dp-setup) repo.
@@ -36,24 +35,22 @@ Instructions are in [terraform/dp-census-atlas-ec2](https://github.com/ONSdigita
 
 There is an instance in Sandbox and in Prod.
 
-
 ## Developer Prerequisites
 
 To use the Atlas host, you must have a few things set up locally:
 
-* AWS account in the environment running the Atlas host you want to use -- talk to a tech lead
-* aws cli and session manager installed and working [Supporting AWSB](https://docs.google.com/document/d/1N8k1HnI7R1f9KgFPLAu37bGDLGPPWF9Gk-eiAQlsxm4)
-* dp cli installed and working [dp-cli](https://github.com/ONSdigital/dp-cli)
-
+- AWS account in the environment running the Atlas host you want to use -- talk to a tech lead
+- aws cli and session manager installed and working [Supporting AWSB](https://docs.google.com/document/d/1N8k1HnI7R1f9KgFPLAu37bGDLGPPWF9Gk-eiAQlsxm4)
+- dp cli installed and working [dp-cli](https://github.com/ONSdigital/dp-cli)
 
 ## atlas.env
 
 Certain environment variables must be set when working with any of the atlas utilities:
 
-	AWS_PROFILE
-	ATLAS_USER
-	COMPOSE_PROJECT_NAME
-	ONS_DP_ENV
+    AWS_PROFILE
+    ATLAS_USER
+    COMPOSE_PROJECT_NAME
+    ONS_DP_ENV
 
 `AWS_PROFILE` is `dp-sandbox` or `dp-prod` currently.
 (We haven't set up a staging instance yet.)
@@ -71,19 +68,18 @@ You can copy `atlas.env.example` to an environment-specific file and modify to s
 
 Then source your env file before working with any atlas utilities, eg:
 
-	. ./sandbox.env
+    . ./sandbox.env
 
 You can clear the environment variables with:
 
-	. ./no.env
-
+    . ./no.env
 
 ## ssh.cfg
 
 ssh is used to get shells on the Atlas host and its containers, and to create tunnels to Docker running on the Atlas host.
 Once you have set the required environment variables, you can Generate a custom `ssh.cfg` file like this:
 
-	make ssh.cfg
+    make ssh.cfg
 
 Before your container is up, you will see an error message, but the file will be configured enough for you to reach the Atlas host itself.
 Run `make ssh.cfg` once your container is up, or whenever there is a change to the host or container.
@@ -91,44 +87,40 @@ Run `make ssh.cfg` once your container is up, or whenever there is a change to t
 There are `Makefile` targets for basic ssh operations, but for anything else you can call `ssh`, `scp`, or `sftp` with `-F ssh.cfg`.
 Run `make` without any arguments to see a list of targets.
 
-
 ## Logging in to the Atlas host
 
 To log in to the Atlas host, do this:
 
-	make ssh-atlas
+    make ssh-atlas
 
 This will give you a shell as `ubuntu`.
 
 It is equivalent to
 
-	dp ssh sandbox atlas 1
+    dp ssh sandbox atlas 1
 
 except that `dp` won't work until the ansible inventory in `dp-setup` is updated with an `[atlas]` host group.
-
 
 ## Create docker tunnel
 
 When you need to access docker on the Atlas host, set up a tunnel like this:
 
-	make tunnel
+    make tunnel
 
 Then you can point the docker cli to `tcp://localhost:2375`.
-
 
 ## Setting up Remote Docker Context
 
 As an easy way to get the docker cli to talk to the tunnel, you can create a docker context.
 Do something like this locally:
 
-	docker context create --description 'docker on atlas host' --docker tcp://localhost:2375 atlas
+    docker context create --description 'docker on atlas host' --docker tcp://localhost:2375 atlas
 
 And when you want to access docker on the Atlas host, do this first:
 
-	docker context use atlas
+    docker context use atlas
 
 (Because ssh access requires the `aws-ssm-ec2-proxy-command.sh` wrapper, it isn't possible to create an ssh-based context currently.)
-
 
 ## Building the Atlas Image
 
@@ -139,11 +131,10 @@ The convention for image names is `atlas-$ATLAS_USER`, where `ATLAS_USER is set 
 
 If the ssh tunnel is up, and you are using the `atlas` context, you can do this:
 
-	make image
+    make image
 
 Change `Dockerfile` and rebuild your image if you need to add/update/remove packages in your work environment.
 Since homes are located in a separate volume, you can replace your image as needed without having to set up your home again.
-
 
 ## Enabling logins in your Atlas Container
 
@@ -154,37 +145,33 @@ For example `/data/dl` is my home.
 
 So login to the Atlas host and set up a basic home which allows you to login, something like this:
 
-	make ssh-atlas
-	sudo -s
-	cd /data
-	mkdir -m 0700 dl		# your username as seen in Dockerfile
-	mkdir -m 0700 dl/.ssh		#   "      "
-	vi dl/.ssh/authorized_keys	# << paste in your ssh public key
-	chown -R 2001:2001 dl		# use your uid:gid as seen in Dockerfile
-
+    make ssh-atlas
+    sudo -s
+    cd /data
+    mkdir -m 0700 dl		# your username as seen in Dockerfile
+    mkdir -m 0700 dl/.ssh		#   "      "
+    vi dl/.ssh/authorized_keys	# << paste in your ssh public key
+    chown -R 2001:2001 dl		# use your uid:gid as seen in Dockerfile
 
 ## Starting your Atlas Container
 
 You can start a detached container running your image:
 
-	make up
+    make up
 
 This will automatically update `ssh.cfg` to allow you to ssh to your container.
-
 
 ## Logging in to your Container
 
 You can ssh to your running container like this:
 
-	make ssh-container
-
+    make ssh-container
 
 ## Stopping your Atlas Container
 
 Stop your container like this:
 
-	make down
-
+    make down
 
 ## local Volume
 
@@ -193,18 +180,16 @@ on the docker EBS volume (under `/var/lib/docker` on the Atlas host).
 
 You can use /local instead of your home if you need faster IO.
 
-
 ## scp and sftp
 
 You can transfer files to and from your container with `scp` and `sftp`.
 Just add `-F ssh.cfg` to the command line:
 
-	scp -F ssh.cfg example.txt container:
+    scp -F ssh.cfg example.txt container:
 
 or
 
-	sftp -F ssh.cfg container
-
+    sftp -F ssh.cfg container
 
 ## Provisioning Atlas users
 
@@ -222,19 +207,17 @@ If you need to add another shell user to the Atlas image:
 
 It's up to the new user to log in and set up their own environment.
 
-
 ## Accessing github from the Atlas host or a container
 
 Outbound port 22 is blocked at the VPC level, so we need to access github on port 443.
 Add this tweak to your `~/.ssh/config` file in your container:
 
-	Host github.com
-		Hostname ssh.github.com
-		Port 443
-		User git
+    Host github.com
+    	Hostname ssh.github.com
+    	Port 443
+    	User git
 
 See [Using SSH over the HTTPS port](https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port)
-
 
 ## Credits
 

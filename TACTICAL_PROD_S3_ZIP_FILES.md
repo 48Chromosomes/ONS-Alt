@@ -6,7 +6,7 @@
 - the s3 bucket can only be accessed from either inside the VPC, an ONS laptop on the VPN, or within the ONS offices.
 - ONS laptops cannot install the AWS CLI, and so can only use the AWS GUI to upload files
 - uploading hundreds of thousands of very small files with the AWS GUI is incredibly slow (30 B/s slow) - it can take a week to upload
-enough data for one release
+  enough data for one release
 
 ## The solution
 
@@ -21,7 +21,7 @@ its intended purpose (producing the data files and adding them to s3) none of th
 3. copy the `dp-prod` profile from your local `~/.aws/config` file to the `~/.aws/config` file on the atlas host
 4. sign in to AWS SSO with `aws sso login --profile dp-prod` from the atlas host. You will need to open a browser, go to the URL indicated in the terminal (shoud be [https://device.sso.eu-west-2.amazonaws.com/](https://device.sso.eu-west-2.amazonaws.com/), but check), and copy/paste the access code from the terminal on the host to the sso website, then click `Allow`. The terminal on the atlas host should say login was successful.
 5. export `AWS_PROFILE=dp-prod` on the atlas host terminal so that the aws cli knows which profile to use.
-6. get your current AWS user id by calling `aws sts get-caller-identity`. Copy the displayed value for `UserId`. 
+6. get your current AWS user id by calling `aws sts get-caller-identity`. Copy the displayed value for `UserId`.
 7. log in to the `dp-prod` AWS console on your dev machine, go to the target bucket, and edit the bucket policy. Add the following to the `Condition` part of the `Deny` block of the policy:
 
 ```JSON
@@ -31,6 +31,7 @@ its intended purpose (producing the data files and adding them to s3) none of th
         ]
     },
 ```
+
 8. Add `S3:PutObject` to the actions available to users able to access the bucket:
 
 ```JSON
@@ -84,15 +85,18 @@ its intended purpose (producing the data files and adding them to s3) none of th
         .... blah
 
 ```
+
 9. you should now be able to get the zip file you uploaded from the target bucket with `aws s3 cp s3://<my target bucket>/<my zip file>.zip <my zip file>.zip`
 10. you should now be able to unzip that file locally with `unzip <my zip file>.zip -d <my zip file>`.
 11. you should now be able to sync the contents of your zip file to s3 (presumably there is a `tiles` and a `breaks` folder in there) with:
+
 ```
 cd <my zip file>
 aws s3 sync breaks s3://<my target bucket>/breaks
 aws s3 sync tiles s3://<my target bucket>/tiles
 ```
-12. Once done and checked, **clean up!**: 
+
+12. Once done and checked, **clean up!**:
     - remove the reference to your user ID from the bucket policy.
     - remove `S3:PutObject` from the list of permitted bucket actions.
     - remove the zip file and unzipped directory from the atlas host filesystem

@@ -14,9 +14,17 @@ export const getColours = (mode: Mode, breaks: number[]): StringQuintuple => {
       return colours.standard;
     case "change":
       return getChangeColours(breaks);
+    case "binary":
+      return getBinaryColours();
     default:
       never(mode);
   }
+};
+
+export const getBinaryColours = (): StringQuintuple => {
+  // Red for <50%, Green for >=50%
+  // We only use first two colors for binary mode
+  return ["#e74c3c", "#27ae60", "#27ae60", "#27ae60", "#27ae60"] as StringQuintuple;
 };
 
 export const getChangeColours = (breaks: number[]): StringQuintuple => {

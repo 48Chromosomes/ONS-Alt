@@ -102,7 +102,7 @@
                     {geoTypePluralNames[g]}
                   </div>
                   <div
-                    class="hidden group-hover:flex group-focus-visible:flex items-center gap-1 absolute left-0 top-0 "
+                    class="hidden group-hover:flex group-focus-visible:flex items-center gap-1 absolute left-0 top-0"
                   >
                     {#if !$params.geoLock}
                       <div><Icon kind="lock" /></div>
@@ -116,13 +116,13 @@
               </button>
             {/if}
             {#if i > geoTypes.indexOf($viewport.geoType)}
-              <div class="flex items-center px-2 bg-ons-grey-100 text-ons-white text-sm last:rounded-r ">
+              <div class="flex items-center px-2 bg-ons-grey-100 text-ons-white text-sm last:rounded-r">
                 <div class="">Unavailable</div>
               </div>
             {/if}
             {#if g === $viewport.geoType && $params.geoLock}
               <div
-                class="flex items-center p-1 last:rounded-r bg-ons-grey-100 text-ons-grey-15 text-lg custom-ring "
+                class="flex items-center p-1 last:rounded-r bg-ons-grey-100 text-ons-grey-15 text-lg custom-ring"
                 use:tooltip={{ placement: "bottom" }}
                 title="The map is locked to the {g.toUpperCase()} geography layer. This will limit the minimum zoom"
               >

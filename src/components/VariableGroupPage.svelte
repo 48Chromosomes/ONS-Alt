@@ -19,7 +19,7 @@
     <div class="text-sm font-extrabold text-slate-500 select-none">&gt;</div>
     <div class=" ">{$params.variableGroup.name}</div>
   </div>
-  <div class="mt-4 mb-2 ">
+  <div class="mt-4 mb-2">
     {$params.variableGroup.desc}
   </div>
   <div class="flex flex-col mb-6 last:border-b-[1px] border-b-slate-300">

@@ -14,7 +14,7 @@
     <div class="flex items-center gap-1.5 whitespace-nowrap">
       <span class="select-none"> &lt; </span>
       <a
-        class="hyperlink-without-group-hover "
+        class="hyperlink-without-group-hover"
         href={buildHyperlink($page.url, {
           mode: $params.mode,
           variableGroup: $params.variableGroup.slug,

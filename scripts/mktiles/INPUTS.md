@@ -11,10 +11,10 @@ There is a separate geojson file for each "layer".
 
 `mktiles2` loads up to four geojson files in the input directory:
 
-* lad.geojson	Local Authorities
-* lsoa.geojson	Lower Layer Super Output Areas
-* msoa.geojson	Middle Layer Super Output Areas
-* oa.geojson	Output Areas
+- lad.geojson Local Authorities
+- lsoa.geojson Lower Layer Super Output Areas
+- msoa.geojson Middle Layer Super Output Areas
+- oa.geojson Output Areas
 
 A message is printed if any are missing, but it's otherwise ok.
 
@@ -28,35 +28,35 @@ properties for easier processing.
 The mapping is case-insensitive.
 It goes like this:
 
-|Property|Mapped to|
-|---|---|
-lad21cd|geocode
-lad11cd|geocode
-lad17cd|geocode
-lsoa21cd|geocode
-lsoa11cd|geocode
-msoa21cd|geocode
-msoa11cd|geocode
-oa21cd|geocode
-oa11cd|geocode
-lad21nm|ename
-lad11nm|ename
-lad17nm|ename
-lsoa21nm|ename
-lsoa11nm|ename
-msoa21nm|ename
-msoa11nm|ename
-oa21nm|ename
-oa11nm|ename
-lad21nmw|wname
-lad11nmw|wname
-lad17nmw|wname
-lsoa21nmw|wname
-lsoa11nmw|wname
-msoa21nmw|wnmae
-msoa11nmw|wname
-oa21nmw|wname
-oa11nmw|wname
+| Property  | Mapped to |
+| --------- | --------- |
+| lad21cd   | geocode   |
+| lad11cd   | geocode   |
+| lad17cd   | geocode   |
+| lsoa21cd  | geocode   |
+| lsoa11cd  | geocode   |
+| msoa21cd  | geocode   |
+| msoa11cd  | geocode   |
+| oa21cd    | geocode   |
+| oa11cd    | geocode   |
+| lad21nm   | ename     |
+| lad11nm   | ename     |
+| lad17nm   | ename     |
+| lsoa21nm  | ename     |
+| lsoa11nm  | ename     |
+| msoa21nm  | ename     |
+| msoa11nm  | ename     |
+| oa21nm    | ename     |
+| oa11nm    | ename     |
+| lad21nmw  | wname     |
+| lad11nmw  | wname     |
+| lad17nmw  | wname     |
+| lsoa21nmw | wname     |
+| lsoa11nmw | wname     |
+| msoa21nmw | wnmae     |
+| msoa11nmw | wname     |
+| oa21nmw   | wname     |
+| oa11nmw   | wname     |
 
 In addition, a `geotype` property is set for each feature based on which file is being
 processed.
@@ -81,9 +81,9 @@ to replace the place names in `msoa.geojson`.
 `msoa-names.csv` is a CSV file with a header line and a line for each MSOA geocode.
 The columns used by `mktiles2` are:
 
-	* `msoa11cd` or `msoa21cd` -- geocode
-	* `msoa11hclnm` or `msoa21hclnm` -- House of Commons English name
-	* `msoa21hclnmw` or `msoa21hclnmw` -- House of Commons Welsh name
+    * `msoa11cd` or `msoa21cd` -- geocode
+    * `msoa11hclnm` or `msoa21hclnm` -- House of Commons English name
+    * `msoa21hclnmw` or `msoa21hclnmw` -- House of Commons Welsh name
 
 Other columns are ignored.
 
@@ -94,8 +94,8 @@ If the Welsh name in `msoa-names.csv` is blank, the English name will be used.
 
 Here is an example fragment of an `msoa-names.csv` file:
 
-	msoa21cd,msoa21nm,msoa21nmw,msoa21hclnm,msoa21hclnmw,localauthorityname,type
-	E02006534,Adur 001,Adur 001,Hillside,,Adur,Present in 2011
+    msoa21cd,msoa21nm,msoa21nmw,msoa21hclnm,msoa21hclnmw,localauthorityname,type
+    E02006534,Adur 001,Adur 001,Hillside,,Adur,Present in 2011
 
 In this example, geocode `E02006534` will have its English name set to "Hillside".
 The `msoa21hclnmw` column is blank, so the Welsh name will also be set to "Hillside".
@@ -110,13 +110,13 @@ of some LADs will be changed.
 
 `recode-lads.csv` looks like this:
 
-	FromCode,ToCode
-	E06000057,E06000048
-	E07000240,E07000100
-	E07000241,E07000104
-	E07000242,E07000097
-	E07000243,E07000101
-	E08000037,E08000020
+    FromCode,ToCode
+    E06000057,E06000048
+    E07000240,E07000100
+    E07000241,E07000104
+    E07000242,E07000097
+    E07000243,E07000101
+    E08000037,E08000020
 
 This file is probably not need for 2021 data.
 
@@ -141,20 +141,21 @@ produce data for.
 
 The file looks like this:
 
-	{
-	  "lad": [
-	    {
-	      "tilename": "ew",
-	      "bbox": {
-	        "east": 1.76,
-	        "north": 58.64,
-	        "west": -7.57,
-	        "south": 49.92
-	      }
-	    }
-	  ],
- 	  . . .
-	}
+    {
+      "lad": [
+        {
+          "tilename": "ew",
+          "bbox": {
+            "east": 1.76,
+            "north": 58.64,
+            "west": -7.57,
+            "south": 49.92
+          }
+        }
+      ],
+
+. . .
+}
 
 The top level arrays are geotypes, and each element of the arrays is a tile.
 So this is just a list of tiles by geotype.
@@ -182,9 +183,9 @@ If a `.CSV` file is not a valid metrics file, a message is printed and the file 
 
 Here is the top of an example metrics file with 2011 data:
 
-	GeographyCode,QS604EW0001,QS604EW0002,QS604EW0003
-	K04000001,26526336,7718656,2543578
-	E92000001,25162721,7307083,2418518
+    GeographyCode,QS604EW0001,QS604EW0002,QS604EW0003
+    K04000001,26526336,7718656,2543578
+    E92000001,25162721,7307083,2418518
 
 The categories are the `QS*` columns and the geocodes are `K04000001` and `E92000001`.
 

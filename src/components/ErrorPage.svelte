@@ -4,7 +4,7 @@
   import { buildHyperlink } from "../helpers/buildHyperlinkHelper";
 </script>
 
-<div class="px-6 py-4 sm:py-6 ">
+<div class="px-6 py-4 sm:py-6">
   <div class="mb-6">
     <a href={buildHyperlink($page.url)} class="flex items-center gap-2 custom-ring hyperlink">
       <div>Home</div>

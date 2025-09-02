@@ -62,7 +62,7 @@
 
 <!-- work-in-progress -->
 {#if false}
-  <div class="mb-6 mt-6 flex justify-end py-3 border-t-[1px] bg-ons-grey-5 px-3 ">
+  <div class="mb-6 mt-6 flex justify-end py-3 border-t-[1px] bg-ons-grey-5 px-3">
     <div class="  ">
       <a
         href="https://www.ons.gov.uk/feedback"

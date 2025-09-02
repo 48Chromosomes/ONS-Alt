@@ -22,10 +22,7 @@
               "code": "uk_armed_forces",
               "slug": "uk-armed-forces",
               "desc": "UK armed forces veteran indicator (5 categories)",
-              "available_geotypes": [
-                "msoa",
-                "lad"
-              ],
+              "available_geotypes": ["msoa", "lad"],
               "choropleth_default": true,
               "dot_density_default": true,
               "categories": [
