@@ -4356,14 +4356,6 @@
                   "legend_str_3": "White"
                 },
                 {
-                  "name": "White Binary",
-                  "slug": "white-binary",
-                  "code": "ethnic_group_tb_6a-004",
-                  "legend_str_1": "of people in {location}",
-                  "legend_str_2": "are",
-                  "legend_str_3": "White (Binary: Red <50%, Green ≥50%)"
-                },
-                {
                   "name": "Other ethnic group",
                   "slug": "other-ethnic-group",
                   "code": "ethnic_group_tb_6a-005",
@@ -4485,6 +4477,14 @@
                   "legend_str_1": "of people in {location}",
                   "legend_str_2": "are",
                   "legend_str_3": "White: English, Welsh, Scottish, Northern Irish or British"
+                },
+                {
+                  "name": "White British Binary",
+                  "slug": "white-binary",
+                  "code": "ethnic_group_tb_20b-013",
+                  "legend_str_1": "of people in {location}",
+                  "legend_str_2": "are",
+                  "legend_str_3": "White British (Binary: Red <50%, Green ≥50%)"
                 },
                 {
                   "name": "White: Irish",

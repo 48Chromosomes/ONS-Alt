@@ -26,37 +26,17 @@ export const renderMapViz = (
       // Binary rendering: red for <50%, green for >=50%
       const binaryColors = ["#e74c3c", "#27ae60"]; // red, green
       
-      // Debug: count red vs green areas
-      let redCount = 0;
-      let greenCount = 0;
-      
       data.places.forEach((p) => {
         // Census data is in percentage format (0-100), so compare to 50, not 0.5
         const threshold = 50; // 50%
         const isMajority = p.isMajority !== undefined ? p.isMajority : p.categoryValue >= threshold;
         const color = isMajority ? binaryColors[1] : binaryColors[0];
         
-        // Debug: log some sample values
-        if (redCount + greenCount < 5) {
-          console.log(`Area ${p.geoCode}: ${p.categoryValue.toFixed(1)}% white -> ${isMajority ? 'GREEN' : 'RED'}`);
-        }
-        
-        if (isMajority) {
-          greenCount++;
-        } else {
-          redCount++;
-        }
-        
         map.setFeatureState(
           { source: layer.name, sourceLayer: layer.sourceLayer, id: p.geoCode },
           { colour: color },
         );
       });
-      
-      console.log(`Binary rendering: ${greenCount} green areas (≥50% white), ${redCount} red areas (<50% white)`);
-      if (redCount === 0) {
-        console.log("No red areas found - this might indicate all areas in current view have ≥50% white population");
-      }
     } else {
       // Normal choropleth rendering
       const colours = getColours(data.params.mode, data.breaks);

@@ -27,7 +27,7 @@
 
 {#if $viz?.params?.category?.slug === "white-binary"}
   <div class="text-xs xs:text-sm pt-0.5 xs:pt-2.5">
-    Binary view showing areas where White ethnicity represents a majority (≥50%) or minority (&lt;50%) of the
+    Binary view showing areas where White British ethnicity represents a majority (≥50%) or minority (&lt;50%) of the
     population.
   </div>
 {/if}

@@ -153,11 +153,11 @@
           <div class="flex items-center justify-center gap-6 mt-3">
             <div class="flex items-center gap-2">
               <div class="w-6 h-6 border border-gray-300" style="background-color: #e74c3c" />
-              <span class="text-sm font-medium">&lt; 50% White (Minority)</span>
+              <span class="text-sm font-medium">&lt; 50% White British (Minority)</span>
             </div>
             <div class="flex items-center gap-2">
               <div class="w-6 h-6 border border-gray-300" style="background-color: #27ae60" />
-              <span class="text-sm font-medium">≥ 50% White (Majority)</span>
+              <span class="text-sm font-medium">≥ 50% White British (Majority)</span>
             </div>
           </div>
         {:else}
