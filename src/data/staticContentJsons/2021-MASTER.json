@@ -4482,6 +4482,7 @@
                   "name": "White British Binary",
                   "slug": "white-binary",
                   "code": "ethnic_group_tb_20b-013",
+                  "restrict_to_modes": ["choropleth"],
                   "legend_str_1": "of people in {location}",
                   "legend_str_2": "are",
                   "legend_str_3": "White British (Binary: Red <50%, Green ≥50%)"
