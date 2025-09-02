@@ -10,6 +10,7 @@
     "build:netlify": ". env/netlify.sh && npm run build",
     "build:ons": ". env/ons.sh && npm run build",
     "build:render": ". env/render.sh && npm run build",
+    "start": "node build/index.js",
     "preview": "vite preview",
     "test": ". env/test.sh && vitest run src/",
     "e2e": "playwright test e2e/",
