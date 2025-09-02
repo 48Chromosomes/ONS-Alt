@@ -110,8 +110,8 @@ const fetchContentForEnv = async (contentConfig: ContentConfig, dataEnv: DataEnv
     return null;
   }
 
-  // load from static if not url
-  if (!contentJsonUrl.startsWith("http")) {
+  // load from static if not url (but treat /api/ as external URL)
+  if (!contentJsonUrl.startsWith("http") && !contentJsonUrl.startsWith("/api/")) {
     if (contentJsonUrl in staticContentJsons) {
       return staticContentJsons[contentJsonUrl];
     } else {
