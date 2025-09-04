@@ -118,23 +118,37 @@ const getGeoType = (map: mapboxgl.Map, classification?: Classification): { actua
     const count = features.length;
     const canvas = map.getCanvas();
     const pixelArea = canvas.clientWidth * canvas.clientHeight;
-    const idealGeotype = (count * 1e6) / pixelArea > 40 ? "lad" : (count * 1e6) / pixelArea > 3 ? "msoa" : "oa";
+    const idealGeotype = (count * 1e6) / pixelArea > 3 ? "msoa" : "oa";
     let availableGeotypes = classification?.available_geotypes;
     // available geotypes should be the ones for change over time data if thats whats being shown
     if (get(params).mode === "change") {
       availableGeotypes = classification?.comparison_2011_data_available_geotypes;
     }
     if (availableGeotypes) {
-      // the first available_geotype is the lowest-level
+      // Always prefer MSOA if available, regardless of calculated ideal
+      const actualGeotype = availableGeotypes.includes("msoa") 
+        ? "msoa" 
+        : availableGeotypes.includes(idealGeotype) 
+        ? idealGeotype 
+        : availableGeotypes[0];
       return {
-        actual: availableGeotypes.includes(idealGeotype) ? idealGeotype : availableGeotypes[0],
+        actual: actualGeotype,
         ideal: idealGeotype,
       };
     } else {
       return { actual: idealGeotype, ideal: idealGeotype };
     }
   } else {
-    return { actual: "lad", ideal: "lad" };
+    // Default to msoa when no features are detected (happens when zoomed out)
+    let availableGeotypes = classification?.available_geotypes;
+    if (get(params).mode === "change") {
+      availableGeotypes = classification?.comparison_2011_data_available_geotypes;
+    }
+    if (availableGeotypes && availableGeotypes.includes("msoa")) {
+      return { actual: "msoa", ideal: "msoa" };
+    } else {
+      return { actual: availableGeotypes?.[0] ?? "msoa", ideal: "msoa" };
+    }
   }
 };
 
